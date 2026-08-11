@@ -1,9 +1,7 @@
+import { Hero } from './sections/Hero'
+
 function App() {
-  return (
-    <div className="min-h-screen bg-ground-0 text-ink font-grotesk">
-      <h1>Crucible</h1>
-    </div>
-  )
+  return <Hero />
 }
 
 export default App
