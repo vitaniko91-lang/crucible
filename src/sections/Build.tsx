@@ -109,13 +109,18 @@ const GUARDRAILS = ['PII redaction', 'Tone', 'No refund over order total']
 export function Build() {
   const reduced = useReducedMotion()
 
-  // Entrance helpers — reduced motion renders the final state with no offset.
-  const enter = (variants: typeof rise | typeof fade, delay: number, dur: number) => ({
-    variants,
-    initial: reduced ? (false as const) : ('hidden' as const),
-    animate: 'visible' as const,
-    transition: t(dur, delay),
-  })
+  // whileInView-based entrance (Build is below the fold — animate on scroll,
+  // not on mount). Reduced motion renders the final state with no offset.
+  const enter = (variants: typeof rise | typeof fade, delay: number = 0, dur: number = DUR.slow) =>
+    reduced
+      ? { variants, initial: false as const, animate: 'visible' as const }
+      : {
+          variants,
+          initial: 'hidden' as const,
+          whileInView: 'visible' as const,
+          viewport: { once: true, margin: '-60px' },
+          transition: t(dur, delay),
+        }
 
   // Numbers derived from the eval suite — never hardcoded.
   const v1 = overall(evalSuite.criteria.map((c) => c.v1)) // 83.0
@@ -255,7 +260,8 @@ export function Build() {
                       key={e.id}
                       d={e.d}
                       initial={reduced ? false : { pathLength: 0 }}
-                      animate={{ pathLength: 1 }}
+                      whileInView={reduced ? undefined : { pathLength: 1 }}
+                      viewport={{ once: true, margin: '-60px' }}
                       transition={{ ...t(DUR.dramatic, 0.15) }}
                     />
                   ))}
@@ -275,7 +281,8 @@ export function Build() {
                   filter: 'blur(14px)',
                 }}
                 initial={reduced ? false : { opacity: 0 }}
-                animate={{ opacity: 1 }}
+                whileInView={reduced ? undefined : { opacity: 1 }}
+                viewport={{ once: true }}
                 transition={{ duration: 1.2, ease: 'easeOut', delay: reduced ? 0 : 0.5 }}
               />
 
@@ -285,10 +292,7 @@ export function Build() {
                 return (
                   <motion.div
                     key={n.id}
-                    variants={rise}
-                    initial={reduced ? false : 'hidden'}
-                    animate="visible"
-                    transition={t(0.52, 0.16 + i * 0.08)}
+                    {...enter(rise, 0.16 + i * 0.08, 0.52)}
                     className="absolute rounded-node border backdrop-blur-[10px]"
                     style={{
                       left: n.x,
