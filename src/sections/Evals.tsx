@@ -74,11 +74,11 @@ export function Evals() {
 
   return (
     <section className="relative min-h-screen w-full overflow-hidden" style={{ background: EVALS_BG }}>
-      <div className="mx-auto grid h-screen max-w-[1440px] grid-cols-[196px_1fr]">
-        {/* ── SIDEBAR ─────────────────────────────────────────── */}
+      <div className="mx-auto grid max-w-[1440px] grid-cols-1 lg:h-screen lg:grid-cols-[196px_1fr]">
+        {/* ── SIDEBAR (top strip on mobile, left rail at lg) ───── */}
         <motion.aside
           {...enter(fade, 0, DUR.slow)}
-          className="flex flex-col gap-[22px] border-r px-4 py-[22px]"
+          className="flex flex-row flex-wrap items-center gap-4 border-b px-5 py-3.5 lg:flex-col lg:flex-nowrap lg:items-stretch lg:gap-[22px] lg:border-b-0 lg:border-r lg:px-4 lg:py-[22px]"
           style={{ borderColor: 'var(--line)' }}
         >
           <div className="flex items-center gap-[9px] text-[15px] font-bold">
@@ -98,7 +98,7 @@ export function Evals() {
             <span style={{ color: 'var(--mut)' }}>▾</span>
           </button>
 
-          <nav className="flex flex-col gap-[3px]">
+          <nav className="flex flex-row flex-wrap gap-2 lg:flex-col lg:gap-[3px]">
             {NAV.map((n) => (
               <button
                 key={n.label}
@@ -112,7 +112,7 @@ export function Evals() {
             ))}
           </nav>
 
-          <div className="mt-auto text-[11.5px]" style={{ color: 'var(--mut2)' }}>
+          <div className="mt-auto hidden text-[11.5px] lg:block" style={{ color: 'var(--mut2)' }}>
             <div className="flex justify-between border-t py-1.5" style={{ borderColor: 'var(--line)' }}>
               <span>v1</span>
               <span>{v1overall.toFixed(1)}%</span>
@@ -125,11 +125,11 @@ export function Evals() {
         </motion.aside>
 
         {/* ── MAIN ────────────────────────────────────────────── */}
-        <div className="flex min-w-0 flex-col overflow-hidden">
+        <div className="flex min-w-0 flex-col lg:overflow-hidden">
           {/* topbar */}
           <motion.div
             {...enter(fade, 0.1, DUR.slow)}
-            className="flex h-[60px] flex-none items-center justify-between border-b px-6"
+            className="flex min-h-[60px] flex-none flex-wrap items-center justify-between gap-3 border-b px-5 py-3 lg:h-[60px] lg:flex-nowrap lg:px-6 lg:py-0"
             style={{ borderColor: 'var(--line)' }}
           >
             <div className="flex items-center gap-3 text-[15px] font-semibold">Support Agent · Evals</div>
@@ -163,10 +163,10 @@ export function Evals() {
             </div>
           </motion.div>
 
-          {/* content grid: summary / mid / flagged */}
-          <div className="grid min-h-0 flex-1 grid-rows-[auto_minmax(0,1fr)_auto] gap-4 px-6 py-5">
+          {/* content grid: summary / mid / flagged — flat stack on mobile, fixed rows at lg */}
+          <div className="flex flex-col gap-4 px-5 py-5 lg:grid lg:min-h-0 lg:flex-1 lg:grid-rows-[auto_minmax(0,1fr)_auto] lg:px-6">
             {/* ── SUMMARY STRIP ─────────────────────────────── */}
-            <div ref={summaryRef} className="flex items-stretch gap-4">
+            <div ref={summaryRef} className="flex flex-col items-stretch gap-4 lg:flex-row">
               {/* verdict */}
               <motion.div
                 {...enter(rise, 0, DUR.slow)}
@@ -204,7 +204,7 @@ export function Evals() {
               </motion.div>
 
               {/* metric tiles */}
-              <div className="grid flex-1 grid-cols-3 gap-3">
+              <div className="grid flex-1 grid-cols-1 gap-3 sm:grid-cols-3">
                 <Tile {...enter(rise, 0.06, DUR.slow)} k="Cases">
                   <span className="text-[26px] font-bold">{Math.round(casesVal)}</span>
                 </Tile>
@@ -226,12 +226,12 @@ export function Evals() {
               </div>
             </div>
 
-            {/* ── MIDDLE: scorecard | diff+judge ────────────── */}
-            <div className="grid min-h-0 grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] gap-4">
+            {/* ── MIDDLE: scorecard | diff+judge — stacked on mobile ── */}
+            <div className="grid grid-cols-1 gap-4 lg:min-h-0 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]">
               {/* scorecard */}
               <motion.div
                 {...enter(rise, 0.15, DUR.slow)}
-                className="flex min-h-0 flex-col overflow-hidden rounded-card border px-[18px] py-4"
+                className="flex flex-col rounded-card border px-[18px] py-4 lg:min-h-0 lg:overflow-hidden"
                 style={{ borderColor: 'var(--brd)', background: 'var(--panel)' }}
               >
                 <div className="mb-3.5 flex items-center justify-between">
@@ -289,7 +289,7 @@ export function Evals() {
               {/* ★ diff + judge (signature) */}
               <motion.div
                 {...enter(rise, 0.26, DUR.slow)}
-                className="flex min-h-0 flex-col overflow-hidden rounded-card px-[18px] py-4"
+                className="flex flex-col rounded-card px-[18px] py-4 lg:min-h-0 lg:overflow-hidden"
                 style={{
                   border: '1px solid rgba(90,176,230,.4)',
                   background: 'var(--panel)',
@@ -361,7 +361,7 @@ export function Evals() {
             </div>
 
             {/* ── FLAGGED STRIP ─────────────────────────────── */}
-            <motion.div {...enter(rise, 0.38, DUR.slow)} className="flex flex-none items-center gap-2.5">
+            <motion.div {...enter(rise, 0.38, DUR.slow)} className="flex flex-none flex-wrap items-center gap-2.5">
               <span className="text-[11px] uppercase tracking-[.5px]" style={{ color: 'var(--mut)' }}>
                 {evalSuite.flagged} flagged
               </span>

@@ -35,12 +35,12 @@ export function Hero() {
 
   return (
     <section className="relative min-h-screen w-full overflow-hidden" style={{ background: BG }}>
-      <div className="relative mx-auto h-screen max-w-[1440px] px-12 py-[26px]">
-        {/* ghost watermark */}
+      <div className="relative mx-auto max-w-[1440px] px-5 py-8 lg:h-screen lg:px-12 lg:py-[26px]">
+        {/* ghost watermark — dropped below lg (only fits the 2-col desktop layout) */}
         <motion.div
           {...enterFade(0.25, 1.3)}
           aria-hidden="true"
-          className="pointer-events-none absolute bottom-[-70px] left-[-10px] z-0 select-none whitespace-nowrap text-[280px] font-bold leading-none tracking-[-8px] text-white/[.035]"
+          className="pointer-events-none absolute bottom-[-70px] left-[-10px] z-0 hidden select-none whitespace-nowrap text-[280px] font-bold leading-none tracking-[-8px] text-white/[.035] lg:block"
         >
           CRUCIBLE
         </motion.div>
@@ -58,7 +58,7 @@ export function Hero() {
               />
               Crucible
             </a>
-            <ul className="flex gap-[30px] text-[13px]" style={{ color: 'var(--mut)' }}>
+            <ul className="hidden gap-[30px] text-[13px] sm:flex" style={{ color: 'var(--mut)' }}>
               {NAV_LINKS.map((l) => (
                 <li key={l}>
                   <a href="#" className="transition-colors hover:text-ink">
@@ -77,8 +77,8 @@ export function Hero() {
           </nav>
         </motion.header>
 
-        {/* hero grid */}
-        <main className="relative z-[2] grid h-[calc(100vh-120px)] grid-cols-[1.05fr_0.95fr] items-center">
+        {/* hero grid — single column below lg, 2-col at lg+ */}
+        <main className="relative z-[2] grid grid-cols-1 gap-12 pt-8 lg:h-[calc(100vh-120px)] lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-0 lg:pt-0">
           {/* copy column */}
           <div>
             <motion.div
@@ -91,7 +91,7 @@ export function Hero() {
 
             <motion.h1
               {...enter(0.18, 0.72)}
-              className="mt-5 text-[74px] font-bold leading-[.98] tracking-[-2.5px]"
+              className="mt-5 text-[clamp(38px,8.5vw,74px)] font-bold leading-[.98] tracking-[-2.5px]"
             >
               Forge the agent.
               <br />
@@ -109,7 +109,7 @@ export function Hero() {
               and version diffs that prove it’s good and safe before it ships.
             </motion.p>
 
-            <motion.div {...enter(0.42, 0.7)} className="mt-[34px] flex items-center gap-4">
+            <motion.div {...enter(0.42, 0.7)} className="mt-[34px] flex flex-wrap items-center gap-4">
               <button
                 type="button"
                 className="rounded-[26px] px-6 py-3.5 text-[14px] font-semibold text-[#08131c]"
@@ -142,11 +142,12 @@ export function Hero() {
           </div>
 
           {/* orb column */}
-          <div className="relative flex h-full items-center justify-center">
+          <div className="relative flex h-full flex-col items-center justify-center">
             <ProvingCore />
 
-            {/* floating glass stat cards */}
-            <motion.div {...enter(0.52, 0.72)} className="absolute right-[20%] top-[20%] z-[3]">
+            {/* floating glass stat cards — absolute over the orb at lg; a wrapped row below it on mobile */}
+            <div className="mt-10 flex w-full flex-wrap justify-center gap-3 lg:mt-0 lg:contents">
+            <motion.div {...enter(0.52, 0.72)} className="z-[3] lg:absolute lg:right-[20%] lg:top-[20%]">
               <Glass className="px-[17px] py-[15px]">
                 <div className="text-[10.5px] uppercase tracking-[1px]" style={{ color: 'var(--mut)' }}>
                   Pass rate
@@ -158,7 +159,7 @@ export function Hero() {
               </Glass>
             </motion.div>
 
-            <motion.div {...enter(0.64, 0.72)} className="absolute bottom-[22%] right-[31%] z-[3]">
+            <motion.div {...enter(0.64, 0.72)} className="z-[3] lg:absolute lg:bottom-[22%] lg:right-[31%]">
               <Glass className="px-[17px] py-[15px]">
                 <div className="text-[10.5px] uppercase tracking-[1px]" style={{ color: 'var(--mut)' }}>
                   Eval suite · Safety
@@ -174,7 +175,7 @@ export function Hero() {
               </Glass>
             </motion.div>
 
-            <motion.div {...enter(0.76, 0.72)} className="absolute bottom-[15%] right-[6%] z-[3]">
+            <motion.div {...enter(0.76, 0.72)} className="z-[3] lg:absolute lg:bottom-[15%] lg:right-[6%]">
               <Glass className="px-[17px] py-[15px]">
                 <div
                   className="font-mono text-[10.5px] uppercase tracking-[1px]"
@@ -187,13 +188,14 @@ export function Hero() {
                 </div>
               </Glass>
             </motion.div>
+            </div>
           </div>
         </main>
 
         {/* index rail */}
         <motion.div
           {...enterFade(0.6, 0.9)}
-          className="absolute right-12 top-1/2 z-[4] -translate-y-1/2"
+          className="absolute right-12 top-1/2 z-[4] hidden -translate-y-1/2 lg:block"
         >
           <IndexRail active={0} />
         </motion.div>
@@ -201,7 +203,7 @@ export function Hero() {
         {/* footline */}
         <motion.div
           {...enterFade(0.7, 0.9)}
-          className="absolute bottom-[26px] left-12 z-[4] flex gap-[26px] font-mono text-[12px]"
+          className="absolute bottom-[26px] left-12 z-[4] hidden gap-[26px] font-mono text-[12px] lg:flex"
           style={{ color: 'var(--mut)' }}
         >
           <span>

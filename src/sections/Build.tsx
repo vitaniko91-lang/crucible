@@ -130,13 +130,13 @@ export function Build() {
   return (
     <section className="relative min-h-screen w-full overflow-hidden" style={{ background: BUILD_BG }}>
       <div
-        className="mx-auto grid h-screen max-w-[1440px] grid-cols-[196px_1fr_312px]"
+        className="mx-auto grid max-w-[1440px] grid-cols-1 lg:h-screen lg:grid-cols-[196px_1fr_312px]"
         style={{ borderColor: 'var(--line)' }}
       >
-        {/* ── SIDEBAR ─────────────────────────────────────────── */}
+        {/* ── SIDEBAR (top strip on mobile, left rail at lg) ───── */}
         <motion.aside
           {...enter(fade, 0, DUR.slow)}
-          className="flex flex-col gap-[22px] border-r px-4 py-[22px]"
+          className="flex flex-row flex-wrap items-center gap-4 border-b px-5 py-3.5 lg:flex-col lg:flex-nowrap lg:items-stretch lg:gap-[22px] lg:border-b-0 lg:border-r lg:px-4 lg:py-[22px]"
           style={{ borderColor: 'var(--line)' }}
         >
           <div className="flex items-center gap-[9px] text-[15px] font-bold">
@@ -156,7 +156,7 @@ export function Build() {
             <span style={{ color: 'var(--mut)' }}>▾</span>
           </button>
 
-          <nav className="flex flex-col gap-[3px]">
+          <nav className="flex flex-row flex-wrap gap-2 lg:flex-col lg:gap-[3px]">
             {NAV.map((n) => (
               <button
                 key={n.label}
@@ -170,7 +170,7 @@ export function Build() {
             ))}
           </nav>
 
-          <div className="mt-auto text-[11.5px]" style={{ color: 'var(--mut2)' }}>
+          <div className="mt-auto hidden text-[11.5px] lg:block" style={{ color: 'var(--mut2)' }}>
             <div className="flex justify-between border-t py-1.5" style={{ borderColor: 'var(--line)' }}>
               <span>v1</span>
               <span>{v1.toFixed(1)}%</span>
@@ -189,7 +189,7 @@ export function Build() {
         <div className="flex min-w-0 flex-col">
           <motion.div
             {...enter(fade, 0.1, DUR.slow)}
-            className="flex h-[60px] items-center justify-between border-b px-[22px]"
+            className="flex min-h-[60px] flex-wrap items-center justify-between gap-3 border-b px-5 py-3 lg:h-[60px] lg:flex-nowrap lg:px-[22px] lg:py-0"
             style={{ borderColor: 'var(--line)' }}
           >
             <div className="flex items-center gap-3 text-[15px] font-semibold">
@@ -219,9 +219,11 @@ export function Build() {
             </div>
           </motion.div>
 
-          {/* canvas */}
+          {/* canvas area — relative box at lg (absolute children); flex column on mobile */}
+          <div className="relative flex flex-1 flex-col lg:block">
+          {/* graph scroller — the fixed 760px stage scrolls horizontally inside this box, never the page */}
           <div
-            className="relative flex-1 overflow-hidden"
+            className="relative h-[500px] w-full overflow-x-auto overflow-y-hidden lg:absolute lg:inset-0 lg:h-auto lg:w-auto lg:overflow-hidden"
             style={{
               backgroundImage: 'radial-gradient(circle, rgba(255,255,255,.045) 1px, transparent 1px)',
               backgroundSize: '26px 26px',
@@ -229,7 +231,7 @@ export function Build() {
           >
             {/* graph stage — nodes + edges share one coordinate space */}
             <div
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+              className="relative mx-auto my-[15px] lg:absolute lg:left-1/2 lg:top-1/2 lg:my-0 lg:-translate-x-1/2 lg:-translate-y-1/2"
               style={{ width: 760, height: 470 }}
             >
               {/* edges (behind nodes) */}
@@ -325,11 +327,12 @@ export function Build() {
                 )
               })}
             </div>
+          </div>
 
-            {/* ── TEST-RUN DOCK ─────────────────────────────── */}
-            <motion.div
+          {/* ── TEST-RUN DOCK — pinned to the canvas at lg, a block below it on mobile ── */}
+          <motion.div
               {...enter(rise, 0.7, 0.64)}
-              className="absolute bottom-4 left-3 right-3 z-[3] flex items-center gap-1.5 rounded-card border px-3 py-[13px] backdrop-blur-[16px]"
+              className="relative z-[3] m-3 flex flex-wrap items-center gap-1.5 rounded-card border px-3 py-[13px] backdrop-blur-[16px] lg:absolute lg:bottom-4 lg:left-3 lg:right-3 lg:m-0 lg:flex-nowrap"
               style={{
                 background: 'rgba(9,22,32,.72)',
                 borderColor: 'var(--brd)',
@@ -353,7 +356,7 @@ export function Build() {
                 </button>
               </div>
 
-              <div className="flex flex-1 items-center gap-1 overflow-hidden">
+              <div className="flex min-w-0 flex-1 items-center gap-1 overflow-x-auto lg:overflow-hidden">
                 {STEPS.map((s, i) => (
                   <div key={s.label} className="flex items-center gap-1">
                     <motion.span
@@ -384,10 +387,10 @@ export function Build() {
           </div>
         </div>
 
-        {/* ── INSPECTOR ───────────────────────────────────────── */}
+        {/* ── INSPECTOR (below the canvas on mobile, right rail at lg) ── */}
         <motion.aside
           {...enter(rise, 0.5, 0.64)}
-          className="flex flex-col gap-4 overflow-auto border-l px-[18px] py-5"
+          className="flex flex-col gap-4 border-t px-5 py-5 lg:overflow-auto lg:border-l lg:border-t-0 lg:px-[18px]"
           style={{ borderColor: 'var(--line)' }}
         >
           <div className="flex items-center gap-[9px]">

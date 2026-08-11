@@ -57,7 +57,7 @@ export function Outro() {
       <motion.div
         {...enter(fade, 0.1, DUR.dramatic)}
         aria-hidden="true"
-        className="pointer-events-none absolute bottom-[-90px] left-1/2 z-0 -translate-x-1/2 select-none whitespace-nowrap text-[300px] font-bold leading-none tracking-[-10px] text-white/[.03]"
+        className="pointer-events-none absolute bottom-[-90px] left-1/2 z-0 hidden -translate-x-1/2 select-none whitespace-nowrap text-[300px] font-bold leading-none tracking-[-10px] text-white/[.03] md:block"
       >
         SHIP
       </motion.div>
@@ -69,7 +69,7 @@ export function Outro() {
         </motion.div>
       </div>
 
-      <div className="relative z-[2] mx-auto max-w-[1440px] px-12 py-[120px]">
+      <div className="relative z-[2] mx-auto max-w-[1440px] px-5 py-20 md:px-12 md:py-[120px]">
         <div className="max-w-[1180px]">
           {/* headline block */}
           <motion.div
@@ -82,7 +82,7 @@ export function Outro() {
 
           <motion.h2
             {...enter(rise, 0.08)}
-            className="mt-5 text-[64px] font-bold leading-[1.02] tracking-[-2.5px]"
+            className="mt-5 text-[clamp(40px,9vw,64px)] font-bold leading-[1.02] tracking-[-2.5px]"
           >
             Ship with proof.
           </motion.h2>

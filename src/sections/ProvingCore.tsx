@@ -10,7 +10,7 @@ export function ProvingCore() {
   const reduced = useReducedMotion()
   return (
     <motion.div
-      className="h-[400px] w-[400px]"
+      className="aspect-square w-[clamp(200px,48vw,400px)] max-w-full"
       animate={reduced ? undefined : { y: [-10, 10, -10] }}
       transition={reduced ? undefined : { duration: 9, repeat: Infinity, ease: 'easeInOut' }}
     >
