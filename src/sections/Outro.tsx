@@ -200,7 +200,7 @@ export function Outro() {
               </p>
             </div>
 
-            <nav className="flex flex-wrap items-center gap-6 text-[13px]">
+            <nav aria-label="Footer" className="flex flex-wrap items-center gap-6 text-[13px]">
               {SIGNATURE_LINKS.map((l) => (
                 <a
                   key={l.label}

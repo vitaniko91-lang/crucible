@@ -99,7 +99,7 @@ export function Evals() {
             <span style={{ color: 'var(--mut)' }}>▾</span>
           </button>
 
-          <nav className="flex flex-row flex-wrap gap-2 lg:flex-col lg:gap-[3px]">
+          <nav aria-label="Workbench" className="flex flex-row flex-wrap gap-2 lg:flex-col lg:gap-[3px]">
             {NAV.map((n) => (
               <button
                 key={n.label}

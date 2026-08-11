@@ -4,7 +4,7 @@ import { motion, useReducedMotion } from 'framer-motion'
  * ProvingCore — the chrome "proving" orb.
  * SVG ported verbatim from the approved hero mockup (hero-petrol-full.html).
  * Slow vertical float via framer-motion; static when prefers-reduced-motion.
- * TODO(Task 8): swap this SVG for a real 3D render + <img> poster (fetchpriority=high).
+ * ProvingCore: SVG chrome orb. Future enhancement: swap for a baked 3D render (Spline/Blender) behind this same seam.
  */
 export function ProvingCore() {
   const reduced = useReducedMotion()

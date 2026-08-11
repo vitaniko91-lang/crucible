@@ -104,7 +104,7 @@ const STEPS: { label: string; ms?: string; out?: string }[] = [
   { label: 'Respond', out: '“Shipped, arrives Tue”' },
 ]
 const TOOLS = ['check_order', 'issue_refund']
-const GUARDRAILS = ['PII redaction', 'Tone', 'No refunds > $200']
+const GUARDRAILS = ['PII redaction', 'Tone', 'No refund over order total']
 
 export function Build() {
   const reduced = useReducedMotion()
@@ -157,7 +157,7 @@ export function Build() {
             <span style={{ color: 'var(--mut)' }}>▾</span>
           </button>
 
-          <nav className="flex flex-row flex-wrap gap-2 lg:flex-col lg:gap-[3px]">
+          <nav aria-label="Workbench" className="flex flex-row flex-wrap gap-2 lg:flex-col lg:gap-[3px]">
             {NAV.map((n) => (
               <button
                 key={n.label}

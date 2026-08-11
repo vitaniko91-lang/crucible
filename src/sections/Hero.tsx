@@ -28,9 +28,11 @@ export function Hero() {
 
   // Numbers derived from the eval suite — never hardcoded.
   const passRate = overall(evalSuite.criteria.map((c) => c.v2)) // 94.8
-  const deltaVal = Math.round(
-    overall(evalSuite.criteria.map((c) => c.v2)) - overall(evalSuite.criteria.map((c) => c.v1)),
-  ) // 12
+  const deltaVal =
+    Math.round(
+      (overall(evalSuite.criteria.map((c) => c.v2)) - overall(evalSuite.criteria.map((c) => c.v1))) *
+        10,
+    ) / 10 // 11.8 — matches the Evals headline delta
   const passed = evalSuite.cases - evalSuite.flagged // 142
 
   return (
@@ -47,7 +49,7 @@ export function Hero() {
 
         {/* nav */}
         <motion.header {...enterFade(0, 0.7)} className="relative z-[5]">
-          <nav className="flex items-center justify-between">
+          <nav aria-label="Primary" className="flex items-center justify-between">
             <a href="#" className="flex items-center gap-2.5 text-[16px] font-bold tracking-[.5px] text-ink">
               <span
                 className="h-3 w-3 rounded-[3px]"
