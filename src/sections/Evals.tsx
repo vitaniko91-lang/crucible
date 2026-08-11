@@ -74,6 +74,7 @@ export function Evals() {
 
   return (
     <section className="relative min-h-screen w-full overflow-hidden" style={{ background: EVALS_BG }}>
+      <h2 className="sr-only">Prove it — evals and judge</h2>
       <div className="mx-auto grid max-w-[1440px] grid-cols-1 lg:h-screen lg:grid-cols-[196px_1fr]">
         {/* ── SIDEBAR (top strip on mobile, left rail at lg) ───── */}
         <motion.aside

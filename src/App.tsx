@@ -5,12 +5,12 @@ import { Outro } from './sections/Outro'
 
 function App() {
   return (
-    <>
+    <main>
       <Hero />
       <Build />
       <Evals />
       <Outro />
-    </>
+    </main>
   )
 }
 

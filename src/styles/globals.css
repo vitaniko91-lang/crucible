@@ -3,12 +3,27 @@
 @import '@fontsource/space-grotesk/600.css';
 @import '@fontsource/space-grotesk/700.css';
 @import '@fontsource/space-mono/400.css';
-@import '@fontsource/space-mono/700.css';
 @tailwind base; @tailwind components; @tailwind utilities;
 :root{
-  --mut: rgba(224,240,250,.6); --mut2: rgba(224,240,250,.4);
+  /* Secondary/tertiary text — alphas tuned to clear WCAG AA (≥4.5:1) on the
+     lightest petrol ground and on glass panels. mut .6→.72, mut2 .4→.65. */
+  --mut: rgba(224,240,250,.72); --mut2: rgba(224,240,250,.65);
   --line: rgba(255,255,255,.08); --panel: rgba(255,255,255,.045);
   --panel2: rgba(255,255,255,.07); --brd: rgba(255,255,255,.14);
+  --brd2: rgba(255,255,255,.16);
 }
 html,body,#root{height:100%}
 body{ font-family: theme('fontFamily.grotesk'); color: theme('colors.ink'); -webkit-font-smoothing:antialiased; }
+
+/* Consistent keyboard focus ring across every interactive element.
+   :focus-visible (not :focus) so it fires on keyboard nav only; outline
+   (not box-shadow) so it survives Windows forced-colors mode. */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid #5ab0e6;
+  outline-offset: 2px;
+}

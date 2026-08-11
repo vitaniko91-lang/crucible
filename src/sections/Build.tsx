@@ -129,6 +129,7 @@ export function Build() {
 
   return (
     <section className="relative min-h-screen w-full overflow-hidden" style={{ background: BUILD_BG }}>
+      <h2 className="sr-only">Build the agent</h2>
       <div
         className="mx-auto grid max-w-[1440px] grid-cols-1 lg:h-screen lg:grid-cols-[196px_1fr_312px]"
         style={{ borderColor: 'var(--line)' }}
@@ -312,6 +313,7 @@ export function Build() {
                         {n.type}
                       </span>
                       <span
+                        aria-hidden="true"
                         className="ml-auto h-[7px] w-[7px] rounded-full"
                         style={{ background: '#7ee6a8', boxShadow: '0 0 8px rgba(126,230,168,.8)' }}
                       />

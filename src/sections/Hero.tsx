@@ -77,8 +77,8 @@ export function Hero() {
           </nav>
         </motion.header>
 
-        {/* hero grid — single column below lg, 2-col at lg+ */}
-        <main className="relative z-[2] grid grid-cols-1 gap-12 pt-8 lg:h-[calc(100vh-120px)] lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-0 lg:pt-0">
+        {/* hero grid — single column below lg, 2-col at lg+ (page-level <main> is in App) */}
+        <div className="relative z-[2] grid grid-cols-1 gap-12 pt-8 lg:h-[calc(100vh-120px)] lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-0 lg:pt-0">
           {/* copy column */}
           <div>
             <motion.div
@@ -148,7 +148,7 @@ export function Hero() {
             {/* floating glass stat cards — absolute over the orb at lg; a wrapped row below it on mobile */}
             <div className="mt-10 flex w-full flex-wrap justify-center gap-3 lg:mt-0 lg:contents">
             <motion.div {...enter(0.52, 0.72)} className="z-[3] lg:absolute lg:right-[20%] lg:top-[20%]">
-              <Glass className="px-[17px] py-[15px]">
+              <Glass bright className="px-[17px] py-[15px]">
                 <div className="text-[10.5px] uppercase tracking-[1px]" style={{ color: 'var(--mut)' }}>
                   Pass rate
                 </div>
@@ -160,7 +160,7 @@ export function Hero() {
             </motion.div>
 
             <motion.div {...enter(0.64, 0.72)} className="z-[3] lg:absolute lg:bottom-[22%] lg:right-[31%]">
-              <Glass className="px-[17px] py-[15px]">
+              <Glass bright className="px-[17px] py-[15px]">
                 <div className="text-[10.5px] uppercase tracking-[1px]" style={{ color: 'var(--mut)' }}>
                   Eval suite · Safety
                 </div>
@@ -176,7 +176,7 @@ export function Hero() {
             </motion.div>
 
             <motion.div {...enter(0.76, 0.72)} className="z-[3] lg:absolute lg:bottom-[15%] lg:right-[6%]">
-              <Glass className="px-[17px] py-[15px]">
+              <Glass bright className="px-[17px] py-[15px]">
                 <div
                   className="font-mono text-[10.5px] uppercase tracking-[1px]"
                   style={{ color: 'var(--mut)' }}
@@ -190,7 +190,7 @@ export function Hero() {
             </motion.div>
             </div>
           </div>
-        </main>
+        </div>
 
         {/* index rail */}
         <motion.div

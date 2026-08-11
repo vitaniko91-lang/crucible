@@ -28,10 +28,6 @@ const SIGNATURE_LINKS: { label: string; href: string }[] = [
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/vitalina-nikulina-0a3088215' },
 ]
 
-// Shared focus-visible ring so keyboard users get a clear, premium indicator
-// on every link (native outline is left intact — never removed).
-const FOCUS = 'rounded-[6px] focus-visible:ring-2 focus-visible:ring-azure focus-visible:ring-offset-2 focus-visible:ring-offset-transparent'
-
 export function Outro() {
   const reduced = useReducedMotion()
 
@@ -125,7 +121,7 @@ export function Outro() {
                   href="https://relay-obs.vercel.app"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`mt-auto inline-flex w-fit items-center gap-2 px-6 py-3 text-[14px] font-semibold text-[#08131c] transition-transform hover:-translate-y-0.5 ${FOCUS}`}
+                  className="mt-auto inline-flex w-fit items-center gap-2 px-6 py-3 text-[14px] font-semibold text-[#08131c] transition-transform hover:-translate-y-0.5"
                   style={{
                     background: 'linear-gradient(135deg,#dff2ff,#b7e2fb)',
                     borderRadius: '26px',
@@ -211,7 +207,7 @@ export function Outro() {
                   href={l.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`inline-flex items-center gap-1 px-0.5 py-1 transition-colors hover:text-ink ${FOCUS}`}
+                  className="inline-flex items-center gap-1 px-0.5 py-1 transition-colors hover:text-ink"
                   style={{ color: 'var(--mut)' }}
                 >
                   {l.label} ↗
